@@ -1,0 +1,23 @@
+[user]
+	name = Alfonso Jiménez
+	email = yo@alfonsojimenez.com
+
+[alias]
+	ci = commit
+	st = status
+	cl = clone
+	co = checkout
+	pl = "pull --rebase"
+
+[core]
+	editor = vim
+
+[color]
+	ui = auto
+
+
+[color "status"]
+        added = yellow
+	changed = green bold
+	untracked = blue bold
+
