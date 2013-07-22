@@ -1,4 +1,5 @@
 set nocompatible
+syntax enable
 filetype plugin on
 set modelines=0
 
@@ -6,6 +7,7 @@ set modelines=0
 let mapleader = ","
 
 set wrap
+set ruler
 set textwidth=79
 set formatoptions=qrn1
 
@@ -23,21 +25,22 @@ set smarttab
 set autoindent
 set copyindent
 set smartindent
-
+ 
 noremap <Up> <Nop>
 noremap <Down> <Nop>
 noremap <Left> <Nop>
 noremap <Right> <Nop>
 
 " Rspec
-map <Leader>t :!rspec -f d -c %<CR>
-
-execute pathogen#infect()
-
-syntax enable
+map <Leader>t :!bundle exec rspec -f d -c %<CR>
 
 " Strip white spaces
 nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
+
+" Require ruby debugger
+nnoremap <F2> orequire 'ruby-debug';debugger<Esc>
+
+execute pathogen#infect()
 
 " Powerline
 " set rtp+=~/.local/lib/python2.7/site-packages/powerline/bindings/vim
