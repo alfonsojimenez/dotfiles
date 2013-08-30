@@ -8,6 +8,7 @@
 	cl = clone
 	co = checkout
 	pl = "pull --rebase"
+  wc = whatchanged --oneline
 
 [core]
 	editor = vim
@@ -15,9 +16,8 @@
 [color]
 	ui = auto
 
-
 [color "status"]
-        added = yellow
+  added = yellow
 	changed = green bold
 	untracked = blue bold
 
