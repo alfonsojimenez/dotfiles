@@ -53,6 +53,12 @@ autocmd vimenter * wincmd p
 " NERDTree finder
 map <leader>r :NERDTreeFind<cr>
 
+" Airline
+let g:airline_left_sep=''
+let g:airline_right_sep=''
+let g:airline_theme='solarized'
+set laststatus=2  " always show statusline
+
 " Toggle NERDTree
 map <C-n> :NERDTreeToggle<CR>
 
