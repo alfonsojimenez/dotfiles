@@ -38,12 +38,13 @@ map <Leader>t :!bundle exec rspec -f d -c %<CR>
 nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
 
 " Require ruby debugger
-nnoremap <F2> orequire 'ruby-debug';debugger<Esc>
+fu! RBdebug()
+  return substitute(system("[[ `ruby -v | awk '{ print substr($2, 0, 2)}'` == 2 ]] && echo \"'byebug';byebug\" || echo \"'ruby-debug';debugger\""), "\n", '', '')
+endfunction
+
+nnoremap <F2> orequire <c-r>=RBdebug()<cr><Esc>
 
 execute pathogen#infect()
-
-" Powerline
-" set rtp+=~/.local/lib/python2.7/site-packages/powerline/bindings/vim
 
 nmap <F5> :NERDTree<CR>
 " Open NERDTree when loading vim
@@ -53,10 +54,13 @@ autocmd vimenter * wincmd p
 " NERDTree finder
 map <leader>r :NERDTreeFind<cr>
 
-" Airline
-let g:airline_left_sep=''
-let g:airline_right_sep=''
-let g:airline_theme='solarized'
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#branch#enabled = 1
+let g:airline#extensions#bufferline#enabled = 1
+let g:airline#extensions#syntastic#enabled = 1
+let g:airline_left_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
 set laststatus=2  " always show statusline
 
 " Toggle NERDTree
