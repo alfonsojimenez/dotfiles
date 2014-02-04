@@ -19,6 +19,7 @@ set tabstop=2
 set shiftwidth=2
 set softtabstop=2
 set backspace=indent,eol,start
+set noswapfile
 set shiftround " round indent to multiple of 'shiftwidth'
 set expandtab
 set smarttab
