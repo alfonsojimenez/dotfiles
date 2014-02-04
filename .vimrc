@@ -38,6 +38,23 @@ map <Leader>t :!bundle exec rspec -f d -c %<CR>
 " Strip white spaces
 nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
 
+" Ctags
+let g:Tlist_Ctags_Cmd="ctags --exclude='*.js'"
+map <Leader>ct :!ctags -R .<CR>
+
+" Tab completion
+set wildmode=list:longest,list:full
+set complete=.,w,t
+function! InsertTabWrapper()
+    let col = col('.') - 1
+    if !col || getline('.')[col - 1] !~ '\k'
+        return "\<tab>"
+    else
+        return "\<c-p>"
+    endif
+endfunction
+inoremap <Tab> <c-r>=InsertTabWrapper()<cr>
+
 " Require ruby debugger
 fu! RBdebug()
   return substitute(system("[[ `ruby -v | awk '{ print substr($2, 0, 2)}'` == 2 ]] && echo \"'byebug';byebug\" || echo \"'ruby-debug';debugger\""), "\n", '', '')
