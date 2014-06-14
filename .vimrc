@@ -64,14 +64,12 @@ nnoremap <F2> orequire <c-r>=RBdebug()<cr><Esc>
 
 execute pathogen#infect()
 
-nmap <F5> :NERDTree<CR>
-" Open NERDTree when loading vim
-autocmd vimenter * NERDTree
-autocmd vimenter * wincmd p
+" ctrlp
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_use_caching=0
 
-" NERDTree finder
-map <leader>r :NERDTreeFind<cr>
-
+" Vim Airline
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#bufferline#enabled = 1
@@ -80,6 +78,11 @@ let g:airline_left_sep = ''
 let g:airline_right_sep = ''
 let g:airline_right_alt_sep = ''
 set laststatus=2  " always show statusline
+
+nmap <F5> :NERDTree<CR>
+
+" NERDTree finder
+map <leader>r :NERDTreeFind<cr>
 
 " Toggle NERDTree
 map <C-n> :NERDTreeToggle<CR>
