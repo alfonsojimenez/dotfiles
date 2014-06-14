@@ -20,4 +20,9 @@ ln -s "$DIR/bin" ~/.bin
 ln -s "$DIR/zshrc" ~/.zshrc
 ln -s "$DIR/konsole/Alfie.colorscheme" ~/.kde/share/apps/konsole/
 
+git submodule init
+git submodule update
+
+zsh
+
 echo "All dotfiles have been installed :)"
