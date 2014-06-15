@@ -1,6 +1,7 @@
 set nocompatible
 syntax enable
 filetype plugin on
+colorscheme alfie
 set modelines=0
 
 " Set mapleader key to ,
@@ -77,6 +78,7 @@ let g:airline#extensions#syntastic#enabled = 1
 let g:airline_left_sep = ''
 let g:airline_right_sep = ''
 let g:airline_right_alt_sep = ''
+let g:airline_theme = 'molokai'
 set laststatus=2  " always show statusline
 
 nmap <F5> :NERDTree<CR>
