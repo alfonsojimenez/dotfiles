@@ -95,10 +95,17 @@ mylauncher = awful.widget.launcher(
 -- {{{ Wibox
 netwidget = widget({ type = "textbox" })
  -- Register widget
+handle = io.popen(
+  "LANG=en_US nmcli -t -f DEVICE,STATE d | grep ':connected' | cut -d ':' -f 1"
+)
+idevice = handle:read("*a")
+handle:close()
+idevice = string.gsub(idevice, "\n", "")
+
 vicious.register(
   netwidget,
   vicious.widgets.net,
-  ' <span color="#CC9393">${wlan0 down_kb}</span> <span color="#7F9F7F">${wlan0 up_kb}</span> ',
+  ' <span color="#CC9393">${'..idevice..' down_kb}</span> <span color="#7F9F7F">${'..idevice..' up_kb}</span> ',
   3
 )
 
