@@ -58,7 +58,7 @@ inoremap <Tab> <c-r>=InsertTabWrapper()<cr>
 
 " Require ruby debugger
 fu! RBdebug()
-  return substitute(system("[[ `ruby -v | awk '{ print substr($2, 0, 2)}'` == 2 ]] && echo \"'byebug';byebug\" || echo \"'ruby-debug';debugger\""), "\n", '', '')
+  return substitute(system("[[ `ruby -v | awk '{ print substr($2, 0, 1)}'` == 2 ]] && echo \"'byebug';byebug\" || echo \"'ruby-debug';debugger\""), "\n", '', '')
 endfunction
 
 nnoremap <F2> orequire <c-r>=RBdebug()<cr><Esc>
