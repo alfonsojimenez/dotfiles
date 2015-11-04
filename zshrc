@@ -15,7 +15,7 @@ bindkey "^K"      kill-whole-line
 bindkey "^B"      backward-word
 bindkey "^W"      forward-word
 
-export JAVA_HOME=/usr/lib/jvm/java-7-oracle
+export JAVA_HOME=/usr/lib/jvm/java-1.7.0-openjdk-amd64
 export PATH=$HOME/.local/bin:$PATH
 
 export GOPATH=$HOME/.go
