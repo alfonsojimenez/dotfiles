@@ -14,7 +14,7 @@
 	editor = vim
 
 [color]
-	ui = auto
+	ui = true
 
 [color "status"]
   added = yellow
