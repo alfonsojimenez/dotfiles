@@ -8,7 +8,7 @@ unlink ~/.gitconfig
 unlink ~/.bundle
 unlink ~/.bin
 unlink ~/.zshrc
-unlink ~/.kde/share/apps/konsole/Alfie.colorscheme
+unlink ~/.local/share/konsole/Alfie.colorscheme
 unlink ~/.config/awesome
 
 ln -s "$DIR/tmux.conf" ~/.tmux.conf
@@ -19,7 +19,7 @@ ln -s "$DIR/gitconfig" ~/.gitconfig
 ln -s "$DIR/bundle" ~/.bundle
 ln -s "$DIR/bin" ~/.bin
 ln -s "$DIR/zshrc" ~/.zshrc
-ln -s "$DIR/konsole/Alfie.colorscheme" ~/.kde/share/apps/konsole/
+ln -s "$DIR/konsole/Alfie.colorscheme" ~/.local/share/konsole/
 ln -s "$DIR/awesome" ~/.config/
 
 git submodule init
