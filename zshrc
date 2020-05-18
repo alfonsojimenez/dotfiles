@@ -10,7 +10,6 @@ export EDITOR=vim
 unsetopt correct_all
 
 bindkey "^H"      beginning-of-line
-bindkey "^L"      end-of-line                          
 bindkey "^K"      kill-whole-line
 bindkey "^B"      backward-word
 bindkey "^W"      forward-word
@@ -29,3 +28,5 @@ eval "$(rbenv init - zsh)"
 if [[ ! $TERM =~ screen ]]; then
   exec tmux
 fi
+export PATH="/usr/local/opt/sbt@0.13/bin:$PATH"
+export PATH="/usr/local/opt/scala@2.11/bin:$PATH"

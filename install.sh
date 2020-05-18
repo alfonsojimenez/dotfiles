@@ -19,7 +19,6 @@ ln -s "$DIR/gitconfig" ~/.gitconfig
 ln -s "$DIR/bundle" ~/.bundle
 ln -s "$DIR/bin" ~/.bin
 ln -s "$DIR/zshrc" ~/.zshrc
-ln -s "$DIR/konsole/Alfie.colorscheme" ~/.local/share/konsole/
 ln -s "$DIR/awesome" ~/.config/
 
 git submodule init
