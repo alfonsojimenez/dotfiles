@@ -1,5 +1,10 @@
+source ~/powerlevel10k/powerlevel10k.zsh-theme
+
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+ZSH_DISABLE_COMPFIX=true
 ZSH=$HOME/.oh-my-zsh
-ZSH_THEME="norm"
+ZSH_THEME="pk10"
 DISABLE_AUTO_UPDATE="true"
 
 plugins=(git)
@@ -14,7 +19,7 @@ bindkey "^K"      kill-whole-line
 bindkey "^B"      backward-word
 bindkey "^W"      forward-word
 
-export JAVA_HOME=/usr/lib/jvm/java-1.7.0-openjdk-amd64
+export JAVA_HOME=$(/usr/libexec/java_home -v11)
 export PATH=$HOME/.local/bin:$PATH
 
 export GOPATH=$HOME/.go
@@ -28,5 +33,16 @@ eval "$(rbenv init - zsh)"
 if [[ ! $TERM =~ screen ]]; then
   exec tmux
 fi
-export PATH="/usr/local/opt/sbt@0.13/bin:$PATH"
-export PATH="/usr/local/opt/scala@2.11/bin:$PATH"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+export ZPLUG_HOME=$(brew --prefix)/opt/zplug
+source $ZPLUG_HOME/init.zsh
+
+# better cat and ls
+alias cat="bat"
+alias ls="exa"
+
+export PATH="/usr/local/opt/openjdk/bin:$PATH"

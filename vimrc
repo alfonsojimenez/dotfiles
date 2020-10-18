@@ -1,74 +1,43 @@
 set nocompatible
-syntax enable
-filetype plugin on
-colorscheme alfie
-set modelines=0
+set encoding=utf-8
 
-" Set mapleader key to ,
 let mapleader = ","
 
-set wrap
+syntax enable
+filetype plugin on
+
+set tabstop=2 shiftwidth=2 expandtab | retab
+set formatoptions=qrn1
+set modelines=0
+set nonumber
+set noshowmode
 set ruler
 set textwidth=79
-set formatoptions=qrn1
+set wrap
 
-" Highlight lines with more than 81 chars
-match CursorLine /\%81v.*/
+set wildmenu
+set wildmode=longest:full,full
 
-" Tabs
-set tabstop=2
-set shiftwidth=2
-set softtabstop=2
-set backspace=indent,eol,start
-set noswapfile
-set shiftround " round indent to multiple of 'shiftwidth'
-set expandtab
-set smarttab
-set autoindent
-set copyindent
-set smartindent
- 
 noremap <Up> <Nop>
 noremap <Down> <Nop>
 noremap <Left> <Nop>
 noremap <Right> <Nop>
 
-" Rspec
-map <Leader>t :!bundle exec rake test TEST=%<CR>
-
 " Strip white spaces
 nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
 
-" Ctags
-let g:Tlist_Ctags_Cmd="ctags --exclude='*.js'"
-map <Leader>ct :!ctags -R .<CR>
+" Byebug
+nnoremap <F2> orequire 'byebug';byebug<Esc>
 
-" Tab completion
-set wildmode=list:longest,list:full
-set complete=.,w,t
-function! InsertTabWrapper()
-    let col = col('.') - 1
-    if !col || getline('.')[col - 1] !~ '\k'
-        return "\<tab>"
-    else
-        return "\<c-p>"
-    endif
-endfunction
-inoremap <Tab> <c-r>=InsertTabWrapper()<cr>
+" vim-fugitive
+nmap <Leader>gb :Gblame<CR>
+nmap <Leader>gs :Gstatus<CR>
 
-" Require ruby debugger
-fu! RBdebug()
-  return system("echo \"'byebug';byebug\"")
-endfunction
-
-nnoremap <F2> orequire <c-r>=RBdebug()<cr><Esc>
-
-execute pathogen#infect()
+" vim-test
+map <Leader>t :TestFile<CR>
+map <Leader>y :TestNearest<CR>
 
 " ctrlp
-let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlP'
-
 if executable('ag')
   set grepprg=ag\ --nogroup\ --nocolor
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
@@ -76,24 +45,33 @@ if executable('ag')
 endif
 nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
-" Vim Airline
-let g:airline_powerline_fonts = 1
-let g:airline#extensions#branch#enabled = 1
-let g:airline#extensions#bufferline#enabled = 1
-let g:airline#extensions#syntastic#enabled = 1
-let g:airline_left_sep = ''
-let g:airline_right_sep = ''
-let g:airline_right_alt_sep = ''
-let g:airline_theme = 'molokai'
+" lightline
 set laststatus=2  " always show statusline
+let g:lightline= {
+  \'colorscheme': 'wombat',
+  \'active': {
+  \  'right': [
+  \    ['lineinfo'], ['filetype', 'percent']
+  \  ]
+  \}
+\}
+let g:gitgutter_override_sign_column_highlight = 0
 
-nmap <F5> :NERDTree<CR>
+" auto-pairs
+let g:AutoPairsMapCR = 0
+let g:AutoPairsMapCh = 0
+let g:AutoPairsMapSpace = 0
+let g:AutoPairsMultilineClose = 0
 
-" NERDTree finder
-map <leader>r :NERDTreeFind<cr>
+" coc-vim
 
-" Toggle NERDTree
-map <C-n> :NERDTreeToggle<CR>
+if filereadable(expand("~/.vim/coc-mappings.vim"))
+  source ~/.vim/coc-mappings.vim
+endif
 
-" Close NERDTree when no file is open
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+" endwise
+let g:endwise_no_mappings = v:true
+inoremap <expr> <Plug>CustomCocCR pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+imap <CR> <Plug>CustomCocCR<Plug>DiscretionaryEnd
+
+hi PreProc ctermfg=Yellow

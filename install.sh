@@ -1,25 +1,21 @@
 DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
 
-unlink ~/.tmux.conf
-unlink ~/.vimrc
-unlink ~/.vim
-unlink ~/.gemrc
-unlink ~/.gitconfig
-unlink ~/.bundle
-unlink ~/.bin
-unlink ~/.zshrc
-unlink ~/.local/share/konsole/Alfie.colorscheme
-unlink ~/.config/awesome
+brew install ag
+brew install bat
+brew install exa
+brew install zsh
 
-ln -s "$DIR/tmux.conf" ~/.tmux.conf
-ln -s "$DIR/vimrc" ~/.vimrc
-ln -s "$DIR/vim" ~/.vim
-ln -s "$DIR/gemrc" ~/.gemrc
-ln -s "$DIR/gitconfig" ~/.gitconfig
-ln -s "$DIR/bundle" ~/.bundle
-ln -s "$DIR/bin" ~/.bin
-ln -s "$DIR/zshrc" ~/.zshrc
-ln -s "$DIR/awesome" ~/.config/
+sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+ln -sfn "$DIR/bin" ~/.bin
+ln -sfn "$DIR/bundle" ~/.bundle
+ln -sfn "$DIR/gemrc" ~/.gemrc
+ln -sfn "$DIR/gitconfig" ~/.gitconfig
+ln -sfn "$DIR/tmux.conf" ~/.tmux.conf
+ln -sfn "$DIR/vim" ~/.vim
+ln -sfn "$DIR/vimrc" ~/.vimrc
+ln -sfn "$DIR/zshrc" ~/.zshrc
+#ln -sfn "$DIR/awesome" ~/.config/
 
 git submodule init
 git submodule update

@@ -1,0 +1,6 @@
+{
+  "metals.sbtScript": "/usr/local/bin/sbt",
+  "metals.javaHome": "/Library/Java/JavaVirtualMachines/openjdk-11.0.2.jdk/Contents/Home",
+  "coc.preferences.formatOnType": true,
+  "codeLens.enable": true
+}
