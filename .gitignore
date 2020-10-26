@@ -1,2 +1,5 @@
 vim/.metals/*
 *.swap
+*.swp
+.DS_Store
+bundle/cache/*
