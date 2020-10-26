@@ -31,3 +31,6 @@
 [submodule "vim/pack/vendor/start/vim-surround"]
 	path = vim/pack/vendor/start/vim-surround
 	url = git@github.com:tpope/vim-surround.git
+[submodule "vim/pack/vendor/start/vim-polyglot"]
+	path = vim/pack/vendor/start/vim-polyglot
+	url = git@github.com:sheerun/vim-polyglot.git

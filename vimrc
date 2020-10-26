@@ -12,7 +12,6 @@ set modelines=0
 set nonumber
 set noshowmode
 set ruler
-set textwidth=79
 set wrap
 
 set wildmenu
