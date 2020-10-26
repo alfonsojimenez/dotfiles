@@ -1,10 +1,8 @@
-source ~/powerlevel10k/powerlevel10k.zsh-theme
-
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 ZSH_DISABLE_COMPFIX=true
 ZSH=$HOME/.oh-my-zsh
-ZSH_THEME="pk10"
+ZSH_THEME="powerlevel10k/powerlevel10k"
 DISABLE_AUTO_UPDATE="true"
 
 plugins=(git)
@@ -35,11 +33,8 @@ if [[ ! $TERM =~ screen ]]; then
 fi
 
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-export ZPLUG_HOME=$(brew --prefix)/opt/zplug
-source $ZPLUG_HOME/init.zsh
+[ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
 # better cat and ls
 alias cat="bat"
