@@ -11,6 +11,7 @@ brew install eza
 brew install fd
 brew install fzf
 brew install gh
+brew install --cask ghostty
 brew install jq
 brew install ripgrep
 brew install zsh
@@ -20,17 +21,6 @@ brew install zsh
 # -------------------------------------------------------------------
 if ! command -v volta &>/dev/null; then
   curl https://get.volta.sh | bash
-fi
-
-# -------------------------------------------------------------------
-# Oh My Zsh + Powerlevel10k
-# -------------------------------------------------------------------
-if [ ! -d "$HOME/.oh-my-zsh" ]; then
-  RUNZSH=no sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-fi
-
-if [ ! -d "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k" ]; then
-  git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k"
 fi
 
 # -------------------------------------------------------------------
