@@ -1,4 +1,7 @@
 vim/.metals/*
+vim/autoload/*
+vim/plugged/*
+vim/.netrwhist
 *.swap
 *.swp
 .DS_Store

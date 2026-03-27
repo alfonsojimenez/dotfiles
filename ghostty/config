@@ -1,0 +1,52 @@
+# Font
+font-family = FiraCode Nerd Font
+font-size = 16
+font-feature = +liga
+font-thicken = true
+font-thicken-strength = 1
+
+# Window
+window-padding-x = 8
+window-padding-y = 4
+window-decoration = true
+macos-titlebar-style = tabs
+window-save-state = always
+confirm-close-surface = false
+mouse-hide-while-typing = true
+
+# Theme
+background = 43443c
+foreground = ffffff
+cursor-color = fba045
+cursor-style = block
+cursor-style-blink = false
+selection-background = fba045
+selection-foreground = 000000
+
+palette = 0=#333333
+palette = 1=#d67471
+palette = 2=#c5cf6d
+palette = 3=#fba045
+palette = 4=#789ff2
+palette = 5=#c57bdb
+palette = 6=#5ac8fa
+palette = 7=#c7c7c7
+palette = 8=#8a8a7a
+palette = 9=#e89895
+palette = 10=#d5df8d
+palette = 11=#ffca6c
+palette = 12=#99b8f9
+palette = 13=#d9a0e8
+palette = 14=#8ad8fc
+palette = 15=#ffffff
+
+# Shell integration
+shell-integration = zsh
+
+# Clipboard
+copy-on-select = clipboard
+clipboard-paste-protection = false
+
+# Performance
+window-vsync = true
+scrollback-limit = 10000

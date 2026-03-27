@@ -4,6 +4,7 @@ set encoding=utf-8
 let mapleader = ","
 
 syntax enable
+set re=0
 filetype plugin on
 
 set tabstop=2 shiftwidth=2 expandtab | retab
@@ -13,6 +14,9 @@ set nonumber
 set noshowmode
 set ruler
 set wrap
+set hidden
+set updatetime=250
+set ttimeoutlen=10
 
 set wildmenu
 set wildmode=longest:full,full
@@ -25,36 +29,57 @@ noremap <Right> <Nop>
 " Strip white spaces
 nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
 
-" Byebug
-nnoremap <F2> orequire 'byebug';byebug<Esc>
+" Debugger
+nnoremap <F2> odebugger<Esc>
+
+" Plugins
+call plug#begin()
+Plug 'itchyny/lightline.vim'
+Plug 'janko-m/vim-test'
+Plug 'jiangmiao/auto-pairs'
+Plug 'junegunn/vim-easy-align'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'tpope/vim-commentary'
+Plug 'sheerun/vim-polyglot'
+Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
+Plug 'vim-ruby/vim-ruby'
+Plug 'github/copilot.vim'
+call plug#end()
+
+" fzf — replaces ctrlp (much faster)
+set rtp+=/opt/homebrew/opt/fzf
+nnoremap <C-p> :Files<CR>
+nnoremap <Leader>b :Buffers<CR>
+nnoremap <Leader>f :Rg<CR>
+nnoremap K :Rg <C-R><C-W><CR>
 
 " vim-fugitive
-nmap <Leader>gb :Gblame<CR>
-nmap <Leader>gs :Gstatus<CR>
+nmap <Leader>gb :Git blame<CR>
+nmap <Leader>gs :Git<CR>
 
 " vim-test
 map <Leader>t :TestFile<CR>
 map <Leader>y :TestNearest<CR>
 
-" ctrlp
-if executable('ag')
-  set grepprg=ag\ --nogroup\ --nocolor
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-  let g:ctrlp_use_caching=0
-endif
-nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
-
 " lightline
-set laststatus=2  " always show statusline
+set laststatus=2
 let g:lightline= {
   \'colorscheme': 'wombat',
   \'active': {
+  \  'left': [
+  \    ['mode', 'paste'], ['gitbranch', 'readonly', 'filename', 'modified']
+  \  ],
   \  'right': [
   \    ['lineinfo'], ['filetype', 'percent']
   \  ]
+  \},
+  \'component_function': {
+  \  'gitbranch': 'FugitiveHead'
   \}
 \}
-let g:gitgutter_override_sign_column_highlight = 0
 
 " auto-pairs
 let g:AutoPairsMapCR = 0
@@ -62,15 +87,20 @@ let g:AutoPairsMapCh = 0
 let g:AutoPairsMapSpace = 0
 let g:AutoPairsMultilineClose = 0
 
-" coc-vim
-
-if filereadable(expand("~/.vim/coc-mappings.vim"))
-  source ~/.vim/coc-mappings.vim
-endif
-
 " endwise
 let g:endwise_no_mappings = v:true
-inoremap <expr> <Plug>CustomCocCR pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-imap <CR> <Plug>CustomCocCR<Plug>DiscretionaryEnd
+
+" vim-easy-align
+xmap ga <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
+
+" vim-commentary — map ,cc and ,cu to match old NERDCommenter muscle memory
+nmap <Leader>cc gcc
+vmap <Leader>cc gc
+nmap <Leader>cu gcc
+vmap <Leader>cu gc
+
+" copilot
+let g:copilot_workspace_folders=["/Users/aljimene/workspace"]
 
 hi PreProc ctermfg=Yellow

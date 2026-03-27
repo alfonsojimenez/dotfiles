@@ -1,25 +1,58 @@
-DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
+#!/usr/bin/env bash
+set -euo pipefail
 
-brew install ag
+DIR="$(cd -P "$(dirname "${BASH_SOURCE[0]:-$0}")" && pwd)"
+
+# -------------------------------------------------------------------
+# Homebrew packages
+# -------------------------------------------------------------------
 brew install bat
-brew install exa
+brew install eza
+brew install fd
+brew install fzf
+brew install gh
+brew install jq
+brew install ripgrep
 brew install zsh
 
-sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+# -------------------------------------------------------------------
+# Volta (Node version manager)
+# -------------------------------------------------------------------
+if ! command -v volta &>/dev/null; then
+  curl https://get.volta.sh | bash
+fi
 
+# -------------------------------------------------------------------
+# Oh My Zsh + Powerlevel10k
+# -------------------------------------------------------------------
+if [ ! -d "$HOME/.oh-my-zsh" ]; then
+  RUNZSH=no sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+fi
+
+if [ ! -d "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k" ]; then
+  git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k"
+fi
+
+# -------------------------------------------------------------------
+# Symlinks
+# -------------------------------------------------------------------
 ln -sfn "$DIR/bin" ~/.bin
 ln -sfn "$DIR/bundle" ~/.bundle
 ln -sfn "$DIR/gemrc" ~/.gemrc
 ln -sfn "$DIR/gitconfig" ~/.gitconfig
+ln -sfn "$DIR/gitignore_global" ~/.gitignore_global
 ln -sfn "$DIR/tmux.conf" ~/.tmux.conf
 ln -sfn "$DIR/vim" ~/.vim
 ln -sfn "$DIR/vimrc" ~/.vimrc
 ln -sfn "$DIR/zshrc" ~/.zshrc
-#ln -sfn "$DIR/awesome" ~/.config/
 
-git submodule init
-git submodule update
+mkdir -p ~/.config/ghostty
+ln -sfn "$DIR/ghostty/config" ~/.config/ghostty/config
 
-zsh
+# -------------------------------------------------------------------
+# Vim plugins
+# -------------------------------------------------------------------
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 echo "All dotfiles have been installed :)"

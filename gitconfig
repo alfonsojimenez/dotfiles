@@ -2,21 +2,48 @@
 	name = Alfonso Jiménez
 	email = me@alfie.cat
 
+[init]
+	defaultBranch = main
+
+[core]
+	editor = vim
+	excludesFile = ~/.gitignore_global
+
+[pull]
+	rebase = true
+
+[push]
+	autoSetupRemote = true
+	default = current
+
+[fetch]
+	prune = true
+
+[merge]
+	conflictstyle = zdiff3
+
+[diff]
+	algorithm = histogram
+	colorMoved = default
+
+[rebase]
+	autoStash = true
+
+[rerere]
+	enabled = true
+
 [alias]
 	ci = commit
 	st = status
 	cl = clone
 	co = checkout
-	pl = "pull --rebase"
-  wc = whatchanged --oneline
-
-[core]
-	editor = vim
+	wc = whatchanged --oneline
+	lg = log --oneline --graph --decorate --all
 
 [color]
 	ui = true
 
 [color "status"]
-  added = yellow
+	added = yellow
 	changed = green bold
 	untracked = blue bold
