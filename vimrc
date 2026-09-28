@@ -7,7 +7,7 @@ syntax enable
 set re=0
 filetype plugin on
 
-set tabstop=2 shiftwidth=2 expandtab | retab
+set tabstop=2 shiftwidth=2 softtabstop=2 expandtab
 set formatoptions=qrn1
 set modelines=0
 set nonumber
@@ -17,6 +17,40 @@ set wrap
 set hidden
 set updatetime=250
 set ttimeoutlen=10
+
+" Search
+set ignorecase smartcase incsearch hlsearch
+
+" System clipboard (yank/paste shared with macOS)
+set clipboard=unnamed
+
+" Delete/change go to black hole register — don't clobber the clipboard.
+" Yank (y) and paste (p) still use the system clipboard via clipboard=unnamed.
+nnoremap d  "_d
+nnoremap D  "_D
+nnoremap c  "_c
+nnoremap C  "_C
+nnoremap x  "_x
+nnoremap X  "_X
+nnoremap s  "_s
+nnoremap S  "_S
+xnoremap d  "_d
+xnoremap c  "_c
+xnoremap x  "_x
+xnoremap s  "_s
+
+" Splits open where you expect
+set splitright splitbelow
+
+" Keep a few lines of context when scrolling
+set scrolloff=3
+
+" Persistent undo — survives closing the file
+set undofile
+set undodir=~/.vim/undo//
+if !isdirectory(expand('~/.vim/undo'))
+  call mkdir(expand('~/.vim/undo'), 'p', 0700)
+endif
 
 set wildmenu
 set wildmode=longest:full,full
@@ -98,9 +132,7 @@ nmap ga <Plug>(EasyAlign)
 nmap <Leader>cc gcc
 vmap <Leader>cc gc
 nmap <Leader>cu gcc
-vmap <Leader>cu gc
 
-" copilot
-let g:copilot_workspace_folders=["/Users/aljimene/workspace"]
+vmap <Leader>cu gc
 
 hi PreProc ctermfg=Yellow

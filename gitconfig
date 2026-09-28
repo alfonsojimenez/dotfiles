@@ -47,3 +47,9 @@
 	added = yellow
 	changed = green bold
 	untracked = blue bold
+
+[includeIf "gitdir:~/workspace/personal/"]
+    path = ~/.config/git/identity/personal.gitconfig
+
+[includeIf "gitdir:~/workspace/g2/"]
+    path = ~/.config/git/identity/g2.gitconfig

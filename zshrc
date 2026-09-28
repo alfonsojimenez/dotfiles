@@ -6,11 +6,12 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 # Exec tmux early — before loading anything expensive (avoids double .zshrc load)
-if [[ ! $TERM =~ (screen|tmux) ]]; then
+if [[ ! $TERM =~ (screen|tmux) ]] && [[ -o interactive ]] && command -v tmux &>/dev/null; then
   exec tmux
 fi
 
 # Theme
+POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
 source ~/.oh-my-zsh/custom/themes/powerlevel10k/powerlevel10k.zsh-theme
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
@@ -29,12 +30,20 @@ export EDITOR=vim
 
 unsetopt correct_all
 
+# History
+HISTFILE=~/.zsh_history
+HISTSIZE=50000
+SAVEHIST=50000
+setopt HIST_IGNORE_ALL_DUPS HIST_REDUCE_BLANKS SHARE_HISTORY INC_APPEND_HISTORY
+
 bindkey "^H"      beginning-of-line
 bindkey "^K"      kill-whole-line
 bindkey "^B"      backward-word
 bindkey "^W"      forward-word
 
-export JAVA_HOME=$(/usr/libexec/java_home -v20)
+if [[ -d /opt/homebrew/opt/openjdk/libexec/openjdk.jdk/Contents/Home ]]; then
+  export JAVA_HOME=/opt/homebrew/opt/openjdk/libexec/openjdk.jdk/Contents/Home
+fi
 export PATH=$HOME/.local/bin:$PATH
 
 export GOPATH=$HOME/.go
@@ -57,18 +66,13 @@ alias cat="bat"
 alias ls="eza"
 
 export PATH="/opt/homebrew/opt/openjdk/bin/:$PATH"
-export VOLTA_HOME="$HOME/.volta"
-export PATH="$VOLTA_HOME/bin:$PATH"
-
-# opencode
-export PATH=/Users/aljimene/.opencode/bin:$PATH
-
-# bun completions
-[ -s "/Users/aljimene/.oh-my-zsh/completions/_bun" ] && source "/Users/aljimene/.oh-my-zsh/completions/_bun"
 
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+
+# bun completions
+[ -s "$HOME/.oh-my-zsh/completions/_bun" ] && source "$HOME/.oh-my-zsh/completions/_bun"
 
 # fzf — Ctrl+R history, Ctrl+T files, Alt+C dirs
 source <(fzf --zsh)
@@ -80,3 +84,6 @@ source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # Syntax highlighting (must be last)
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# opencode
+export PATH=/Users/ajimenez/.opencode/bin:$PATH
